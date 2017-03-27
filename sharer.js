@@ -1,15 +1,4 @@
-/**
- * @preserve
- * Sharer.js
- *
- * @description Create your own social share buttons
- * @version 0.3.0
- * @author Ellison Leao <ellisonleao@gmail.com>
- * @license MIT
- *
- */
-
-(function (window, document) {
+var Sharer = (function () {
     'use strict';
     /**
      * @constructor
@@ -43,17 +32,6 @@
                         shareUrl: 'https://www.facebook.com/sharer/sharer.php',
                         params: {u: this.getValue('url')}
                     },
-                    googleplus: {
-                        shareUrl: 'https://plus.google.com/share',
-                        params: {url: this.getValue('url')}
-                    },
-                    linkedin: {
-                        shareUrl: 'https://www.linkedin.com/shareArticle',
-                        params: {
-                            url: this.getValue('url'),
-                            mini: true
-                        }
-                    },
                     twitter: {
                         shareUrl: 'https://twitter.com/intent/tweet/',
                         params: {
@@ -70,6 +48,18 @@
                             body: this.getValue('title') + '\n' + this.getValue('url')
                         },
                         isLink: true
+                    },
+                    /*
+                    googleplus: {
+                        shareUrl: 'https://plus.google.com/share',
+                        params: {url: this.getValue('url')}
+                    },
+                    linkedin: {
+                        shareUrl: 'https://www.linkedin.com/shareArticle',
+                        params: {
+                            url: this.getValue('url'),
+                            mini: true
+                        }
                     },
                     whatsapp: {
                         shareUrl: 'whatsapp://send',
@@ -252,7 +242,7 @@
                             'linknote': this.getValue('description'),
                             'type': 'page'
                         }
-                    }
+                    }*/
                 },
                 s = sharers[sharer];
 
@@ -299,26 +289,6 @@
         }
     };
 
-    /**
-     * Creates a click event on every DOM element which has the `sharer` class
-     */
+    return Sharer;
 
-    function startSharer(){
-        var elems = document.querySelectorAll('.sharer'),
-            i,
-            l = elems.length;
-
-        function addShare(elem) {
-            var target = elem.currentTarget || elem.srcElement;
-            var sharer = new Sharer(target);
-            sharer.share();
-        }
-
-        for (i = 0; i < l ; i++) {
-            elems[i].addEventListener('click', addShare);
-        }
-    }
-    window.addEventListener('load', startSharer());
-    window.addEventListener('page:load', startSharer());
-
-})(window, document);
+})();
